@@ -1,0 +1,15 @@
+version: '1.0'
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: trelloDb
+      POSTGRES_USER: father
+      POSTGRES_PASSWORD: passwd123S
+    volumes:
+      - postgres_data:/var/lib/postgres/data
+volumes:
+  postgres_data:
