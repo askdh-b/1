@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Card } from './card.entity';
 import { Repository } from 'typeorm';
 import { ColumnService } from 'src/column/column.service';
-import { JwtService } from '@nestjs/jwt';
 import { CardDto } from './card.dto';
 
 @Injectable()
@@ -13,7 +12,6 @@ export class CardService {
         @InjectRepository(Card)
         private readonly cardRepository: Repository<Card>,
         private columnService: ColumnService,
-        private jwtService: JwtService
     ) {}
 
     async getCard(id: number): Promise<Card> {

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, Put, Request, UseGuards, forwardRef } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put, Request, UseGuards, forwardRef } from '@nestjs/common';
 import { ColumnService } from './column.service';
 import { Column } from './column.entity';
 import { ColumnDto } from './column.dto';
@@ -11,7 +11,13 @@ export class ColumnController {
 
     @Get("users/:userId/columns/:columnId")
     async getColumn(@Param("columnId") columnId: number): Promise<Column> {
-        return await this.columnService.getColumn(columnId);
+        const column = await this.columnService.getColumn(columnId);
+
+        if (!column) {
+            throw new NotFoundException('This column doesn\'t exist');
+        }
+
+        return column;
     }
 
     @Get("users/:userId/columns")

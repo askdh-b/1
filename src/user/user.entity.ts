@@ -1,4 +1,3 @@
-import { Exclude } from "class-transformer";
 import { IsEmail, IsString, MaxLength, MinLength } from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
@@ -32,7 +31,6 @@ export class User {
     lastname: string;
 
     @IsString()
-    @Column()
-    @Exclude({toPlainOnly: true})   
+    @Column({ select: false })
     password_hash: string;
 }

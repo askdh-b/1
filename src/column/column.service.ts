@@ -15,11 +15,11 @@ export class ColumnService {
     ) {}
 
     async getColumn(id: number): Promise<Column> {
-        return await this.columnRepository.findOne( { where: { id: id } } );
+        return await this.columnRepository.findOne({ where: { id: id } });
     }
 
     async getAllColumns(userId: number): Promise<Column[]> {
-        return await this.columnRepository.find( { where: { user: await this.userService.getUser(userId) } } );
+        return await this.columnRepository.find({ where: { user: await this.userService.getUser(userId) } });
     }
 
     async createColumn(userId: number, columnDto: ColumnDto): Promise<Column> {

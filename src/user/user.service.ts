@@ -1,10 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from './user.dto';
 import { Md5 } from 'ts-md5';
-import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
@@ -15,11 +14,11 @@ export class UserService {
     ) {}
 
     async getUser(id: number): Promise<User> {
-        return await this.userRepository.findOne({ where: {id: id}});
+        return await this.userRepository.findOne({ where: { id: id } });
     }
 
     async getUserByEmail(email: string): Promise<User> {
-        return await this.userRepository.findOne({ where: { email: email }});
+        return await this.userRepository.findOne({ where: { email: email } });
     }
 
     async getAllUsers(): Promise<User[]> {
@@ -44,7 +43,7 @@ export class UserService {
             lastname: userDto.lastname,
             password_hash: this.hash(userDto.password)
         });
-        return await this.userRepository.findOne({ where: {id: id}});
+        return await this.userRepository.findOne({ where: { id: id } });
     }
 
     async deleteUser(id: number) {

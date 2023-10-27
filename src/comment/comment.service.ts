@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Comment } from './comment.entity';
 import { CardService } from 'src/card/card.service';
-import { JwtService } from '@nestjs/jwt';
 import { CommentDto } from './comment.dto';
 import { UserService } from 'src/user/user.service';
 

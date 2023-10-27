@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UseGuards, forwardRef } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put, UseGuards, forwardRef } from '@nestjs/common';
 import { CardService } from './card.service';
 import { Card } from './card.entity';
 import { CardDto } from './card.dto';
@@ -11,7 +11,13 @@ export class CardController {
 
     @Get("users/:userId/columns/:columnId/cards/:cardId")
     async getCard(@Param("cardId") cardId: number): Promise<Card> {
-        return await this.cardService.getCard(cardId);
+        const card = await this.cardService.getCard(cardId);
+
+        if (!card) {
+            throw new NotFoundException('This card doesn\'t exist');
+        }
+
+        return card;
     }
 
     @Get("users/:userId/columns/:columnId/cards")

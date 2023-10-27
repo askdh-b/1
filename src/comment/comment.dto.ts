@@ -7,6 +7,6 @@ export class CommentDto {
 
     @IsNotEmpty()
     @MinLength(1)
-    @MaxLength(255)
+    @MaxLength(4000)
     content: string
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, Put, Request, UseGuards, forwardRef } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put, Request, UseGuards, forwardRef } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { Comment } from './comment.entity';
 import { CommentDto } from './comment.dto';
@@ -11,7 +11,13 @@ export class CommentController {
 
     @Get("users/:userId/columns/:columnId/cards/:cardId/comments/:commentId")
     async getComment(@Param("commentId") commentId: number): Promise<Comment> {
-        return await this.commentService.getComment(commentId);
+        const comment = await this.commentService.getComment(commentId);
+
+        if (!comment) {
+            throw new NotFoundException('This comment doesn\'t exist');
+        }
+
+        return comment;
     }
 
     @Get("users/:userId/columns/:columnId/cards/:cardId/comments")
