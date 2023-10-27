@@ -31,6 +31,6 @@ export class User {
     lastname: string;
 
     @IsString()
-    @Column({ select: false })
+    @Column()
     password_hash: string;
 }

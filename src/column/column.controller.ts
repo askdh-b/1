@@ -25,9 +25,10 @@ export class ColumnController {
         return await this.columnService.getAllColumns(userId);
     }
 
-    @Post("users/:userId/columns")
-    async addColumn(@Param("userId") userId: number, @Body() column: ColumnDto): Promise<Column> {
-        return await this.columnService.createColumn(userId, column);
+    @UseGuards(JwtAuthGuard)
+    @Post("columns")
+    async addColumn(@Request() req: any, @Body() column: ColumnDto): Promise<Column> {
+        return await this.columnService.createColumn(req.userId, column);
     }
 
     @UseGuards(JwtAuthGuard)

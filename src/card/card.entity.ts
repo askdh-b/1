@@ -22,11 +22,16 @@ export class Card {
     @CreateDateColumn()
     createdAt: Date
 
-    @DColumn()
+    @DColumn({
+        nullable: true
+    })
     deadline: Date
 
+    @IsOptional()
     @IsString()
-    @DColumn()
+    @DColumn({
+        nullable: true
+    })
     status: string
 
     @ManyToOne(type => Column)
